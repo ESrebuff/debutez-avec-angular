@@ -1,27 +1,22 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { FaceSnap } from '../models/face-snap.model';
+import { FaceSnapService } from '../services/face-snap.services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-face-snap',
   templateUrl: './face-snap.component.html',
   styleUrls: ['./face-snap.component.scss']
 })
-export class FaceSnapComponent implements OnInit {
+export class FaceSnapComponent {
   @Input() faceSnap!: FaceSnap;
 
-  // declare params
-  toggleSnapped!: boolean;
+  constructor(
+    private faceSnapService: FaceSnapService,
+    private router: Router) {}
 
-  // init params
-  ngOnInit(): void {
-      this.toggleSnapped = false;
-  }
-
-  // actions
-  onSnap() {
-    if(this.toggleSnapped) this.faceSnap.snaps--
-    else this.faceSnap.snaps++;
-    this.toggleSnapped = !this.toggleSnapped
+  onViewFaceSnap(faceSnapId: number): void {
+    this.router.navigateByUrl(`facesnaps/${faceSnapId}`);
   }
 
 }
