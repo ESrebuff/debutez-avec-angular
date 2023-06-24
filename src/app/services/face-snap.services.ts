@@ -75,4 +75,10 @@ export class FaceSnapService {
       const faceSnap = this.getFaceSnapById(faceSnapId);
       toggleSnapped === true ? faceSnap.snaps-- : faceSnap.snaps++; 
     }
+
+    addFaceSnap(snapForm: FaceSnap) {
+      let faceSnap = Math.max(...this.faceSnaps.map(snapFace => snapFace.id));
+      snapForm.id = faceSnap++;
+      this.faceSnaps.push(snapForm);
+    }
 }
